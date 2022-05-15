@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
 
 export default function App() {
   // Mapeamento de teclas
-  const buttons = ['LIMPAR', 'DEL', '%', '╱', 7, 8, 9, "╳", 4, 5, 6, '―', 1, 2, 3, '＋', '+/-', 0, ',',  '=']
+  const buttons = ['LIMPAR', 'DEL', '%', '/', 7, 8, 9, "x", 4, 5, 6, '-', 1, 2, 3, '+', '+/-', 0, ',',  '=']
 
   const [currentNumber, setCurrentNumber] = useState('');
   const [lastNumber, setLastNumber] = useState('');
@@ -75,7 +75,7 @@ export default function App() {
             <TouchableOpacity
               onPress={() => handleInput(button)}
               key={button}
-              style={[styles.button, { backgroundColor: '#3dd0e3' }]}
+              style={[styles.button, { backgroundColor: '#1E1240' }]}
             >
               <Text
                 style={[styles.textButton, { color: 'white', fontSize: 30 }]}
@@ -93,7 +93,7 @@ export default function App() {
               <Text
                 style={[
                   styles.textButton,
-                  { color: typeof button === 'number' ? 'black' : '#0093a6' },
+                  { color: typeof button === 'number' ? '#E9E3EF' : '#B5A4C1' },
                 ]}
               >
                 {button}
@@ -114,10 +114,10 @@ const styles = StyleSheet.create({
   results: {
     flex: 2,
     justifyContent: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#1E1240',
   },
   resultText: {
-    color: '#282F38',
+    color: '#FEFEFE',
     fontSize: 32,
     fontWeight: 'bold',
     padding: 12,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   button: {
-    backgroundColor: 'white',
+    backgroundColor: '#3D0075',
     alignItems: 'center',
     justifyContent: 'center',
     minWidth: 90,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   textButton: {
-    color: '#7c7c7c',
+    color: '#F1EDF5',
     fontSize: 20,
   },
 });
