@@ -3,40 +3,86 @@ import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
 
 export default function App() {
   // Mapeamento de teclas
-  const buttons = ['LIMPAR', 'DEL', '%', '/', 7, 8, 9, "x", 4, 5, 6, '-', 1, 2, 3, '+', '+/-', 0, '.',  '=']
+  const buttons = [
+    'LIMPAR',
+    'DEL',
+    '%',
+    '/',
+    7,
+    8,
+    9,
+    'x',
+    4,
+    5,
+    6,
+    '-',
+    1,
+    2,
+    3,
+    '+',
+    '+/-',
+    0,
+    '.',
+    '=',
+  ];
 
   const [currentNumber, setCurrentNumber] = useState('');
   const [lastNumber, setLastNumber] = useState('');
 
   function calculator() {
     const splitNumbers = currentNumber.split(' ');
-    const fistNumber = parseFloat(splitNumbers[0]);
-    const lastNumber = parseFloat(splitNumbers[2]);
+    console.log(splitNumbers)
+    var fistNumber = parseFloat(splitNumbers[0]);
+    var lastNumber = parseFloat(splitNumbers[2]);
     const operator = splitNumbers[1];
+    const porcent = lastNumber * 0.01 * fistNumber;
+    
 
+    if (splitNumbers.length <=3){
     // Faz ação referente tecla pressionada
     switch (operator) {
       case '+':
         setCurrentNumber((fistNumber + lastNumber).toString());
         return;
-      case '-':
-        setCurrentNumber((fistNumber - lastNumber).toString());
+        case '-':
+          setCurrentNumber((fistNumber - lastNumber).toString());
+          return;
+          case 'x':
+            setCurrentNumber((fistNumber * lastNumber).toString());
         return;
-      case 'x':
-        setCurrentNumber((fistNumber * lastNumber).toString());
-        return;
-      case '/':
+        case '/':
         setCurrentNumber((fistNumber / lastNumber).toString());
-    }
+        case '%': 
+        setCurrentNumber(porcent.toString()); // Calcula o caso do tipo 20 % 40 = 8
+        return;
+    }}else if ((splitNumbers[3].toString().includes('%'))){ // Calcula o caso do tipo 200 + 20% = 240
+        lastNumber = porcent;
+        switch (operator) {
+          case '+':
+            setCurrentNumber((fistNumber + lastNumber).toString());
+            return;
+            case '-':
+              setCurrentNumber((fistNumber - lastNumber).toString());
+              return;
+              case 'x':
+                setCurrentNumber((fistNumber * lastNumber).toString());
+            return;
+            case '/':
+            setCurrentNumber((fistNumber / lastNumber).toString());
+            case '%':
+            setCurrentNumber(porcent.toString());
+            return;
+    }}
   }
 
   function handleInput(buttonPressed) {
     console.log(buttonPressed); // Mostra no Console a tecla pressionada
     if (
-      (buttonPressed === '+') |
-      (buttonPressed === '-') |
-      (buttonPressed === 'x') |
-      (buttonPressed === '/')
+      (buttonPressed === '+') ||
+      (buttonPressed === '-') ||
+      (buttonPressed === 'x') ||
+      (buttonPressed === '/') ||
+      (buttonPressed === '%')
     ) {
       setCurrentNumber(`${currentNumber} ${buttonPressed} `);
       return;
@@ -54,7 +100,7 @@ export default function App() {
         calculator();
         return;
       case '+/-':
-        setCurrentNumber((currentNumber * -1));
+        setCurrentNumber(currentNumber * -1);
         return;
     }
 
